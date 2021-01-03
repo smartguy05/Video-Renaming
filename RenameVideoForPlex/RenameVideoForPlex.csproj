@@ -3,6 +3,12 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Plex.Renaming.Common\Video.Renaming.Common.csproj" />
+    <ProjectReference Include="..\PlexRenamingEngine\Plex.Renaming.Engine.csproj" />
+  </ItemGroup>
 
 </Project>

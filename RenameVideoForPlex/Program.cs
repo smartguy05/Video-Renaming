@@ -1,27 +1,38 @@
-﻿using System;
+﻿using Plex.Renaming.Engine;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+using Video.Renaming.Common.Interfaces;
+using Video.Renaming.Common.Utilities;
 
 namespace RenameVideoForPlex
 {
     public class Program
     {
-        static void Main(string[] args)
+        private static async Task Main(string[] args)
         {
-            // open using command line
+            var parsedArgs = ParseArgsFromCommandLine(args);
+            var cancellationTokenSource = new CancellationTokenSource();
+
             // use current directory or directory supplied
+            var directory = parsedArgs
+                                .Select(s => s.Name)
+                                .FirstOrDefault(f => f?.ToUpper() == "directory")
+                            ?? Directory.GetCurrentDirectory();
 
-            // get all folders in directory
+            var engine = new RenamingEngine<PlexDirectoryWorker>();
+            var folders = FileUtilities.GetFolders(directory);
 
-            // for each folder
+            var results = engine.ProcessDirectoryAsync(folders, cancellationTokenSource.Token);
+            // check results and print
+        }
 
-            // get folder name
-            
-            // try to get imdb id
-            //      if able to get id append tag to folder
-            
-            // find all video files and rename to same as folder
-                // don't interrupt file size ending (eg. - 4k, - 1080p, etc)
-            // do same for subtitle files, but don't touch language suffix
-
+        private static IEnumerable<(string Name, string value)> ParseArgsFromCommandLine(string[] args)
+        {
+            throw new NotImplementedException();
         }
     }
 }

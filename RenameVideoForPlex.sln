@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30523.141
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RenameVideoForPlex", "RenameVideoForPlex\RenameVideoForPlex.csproj", "{334B501D-2C0F-4117-809C-9AA14AFD1983}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RenameVideoForPlex", "RenameVideoForPlex\RenameVideoForPlex.csproj", "{334B501D-2C0F-4117-809C-9AA14AFD1983}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plex.Renaming.Engine", "PlexRenamingEngine\Plex.Renaming.Engine.csproj", "{665E9D99-41BF-4519-B7CA-561FDE5CD172}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Plex.Renaming.Engine", "PlexRenamingEngine\Plex.Renaming.Engine.csproj", "{665E9D99-41BF-4519-B7CA-561FDE5CD172}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plex.Renaming.Common", "Plex.Renaming.Common\Plex.Renaming.Common.csproj", "{6E28BA76-282D-4D47-82B3-DFD52FD82C12}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Video.Renaming.Common", "Plex.Renaming.Common\Video.Renaming.Common.csproj", "{6E28BA76-282D-4D47-82B3-DFD52FD82C12}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
