@@ -15,13 +15,10 @@ namespace Plex.Renaming.Engine
 
         public override Task<RenamingResult> StartRenamingProcess(string folder)
         {
-            var movieName = GetTitle(folder);
-            var movieYear = GetYear(folder);
+            var movieName = GetTitleFromFolder(folder);
+            var movieYear = GetYearFromFolder(folder);
 
             var fileAttributes = FileUtilities.GetFileAttributes(folder);
-
-            // try to get imdb id
-            //      if able to get id append tag to folder
 
             // find all video files and rename to same as folder
             // don't interrupt file size ending (eg. - 4k, - 1080p, etc)
@@ -31,12 +28,7 @@ namespace Plex.Renaming.Engine
             throw new NotImplementedException();
         }
 
-        private string GetImdbId(string folderName)
-        {
-            throw new NotImplementedException();
-        }
-
-        private string GetTitle(string folderName)
+        private string GetTitleFromFolder(string folderName)
         {
             throw new NotImplementedException();
             var regex = new Regex("");
@@ -44,7 +36,7 @@ namespace Plex.Renaming.Engine
             return "";
         }
 
-        private string GetYear(string folderName)
+        private string GetYearFromFolder(string folderName)
         {
             throw new NotImplementedException();
 

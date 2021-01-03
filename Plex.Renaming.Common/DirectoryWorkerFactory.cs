@@ -1,8 +1,9 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
+using Video.Renaming.Common.Interfaces;
 using Video.Renaming.Common.Models;
 
-namespace Video.Renaming.Common.Interfaces
+namespace Video.Renaming.Common
 {
     public static class DirectoryWorkerFactory
     {

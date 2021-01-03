@@ -1,10 +1,11 @@
-﻿using Plex.Renaming.Engine;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Plex.Renaming.Engine;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
+using Video.Renaming.Common;
 using Video.Renaming.Common.Interfaces;
 using Video.Renaming.Common.Utilities;
 
@@ -12,21 +13,31 @@ namespace RenameVideoForPlex
 {
     public class Program
     {
-        private static async Task Main(string[] args)
+        private static CancellationTokenSource _cancellationTokenSource;
+        private static string _directory;
+
+        public static void AddServices(ServiceCollection services)
         {
+            services.AddSingleton<IDirectoryWorker, PlexDirectoryWorker>();
+            services.AddSingleton<IRenamingEngine, RenamingEngine<PlexDirectoryWorker>>();
+        }
+
+        private static void Main(string[] args)
+        {
+            _cancellationTokenSource = new CancellationTokenSource();
+            var serviceProvider = ConfigurationBuilder.BuildConfiguration(AddServices);
+
             var parsedArgs = ParseArgsFromCommandLine(args);
-            var cancellationTokenSource = new CancellationTokenSource();
 
-            // use current directory or directory supplied
-            var directory = parsedArgs
-                                .Select(s => s.Name)
-                                .FirstOrDefault(f => f?.ToUpper() == "directory")
-                            ?? Directory.GetCurrentDirectory();
+            _directory = parsedArgs
+                             .Select(s => s.Name)
+                             .FirstOrDefault(f => f?.ToUpper() == "directory")
+                         ?? Directory.GetCurrentDirectory();
 
-            var engine = new RenamingEngine<PlexDirectoryWorker>();
-            var folders = FileUtilities.GetFolders(directory);
+            var engine = serviceProvider.GetService<IRenamingEngine>();
+            var folders = FileUtilities.GetFolders(_directory);
 
-            var results = engine.ProcessDirectoryAsync(folders, cancellationTokenSource.Token);
+            var results = engine.ProcessDirectoryAsync(folders, _cancellationTokenSource.Token);
             // check results and print
         }
 

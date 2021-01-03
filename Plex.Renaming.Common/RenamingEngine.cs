@@ -3,11 +3,12 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
+using Video.Renaming.Common.Interfaces;
 using Video.Renaming.Common.Models;
 
-namespace Video.Renaming.Common.Interfaces
+namespace Video.Renaming.Common
 {
-    public class RenamingEngine<T> where T : IDirectoryWorker, new()
+    public class RenamingEngine<T> : IRenamingEngine where T : IDirectoryWorker, new()
     {
         public double FileProgress => FilesProcessed / TotalFiles == 0 ? 1 : TotalFiles;
         public double FolderProgress => FoldersProcessed / TotalFolders == 0 ? 1 : TotalFolders;
